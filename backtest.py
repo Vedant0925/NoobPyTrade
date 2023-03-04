@@ -1,3 +1,6 @@
+import strategy
+import importlib
+from strategy import TradingStrategy
 def get_profit_window(prices):
     buy = prices[0]
     profit = 0
@@ -103,3 +106,9 @@ def get_profit_window(prices):
     
     return profit
   
+max_profit = strategy.get_profit_window([x['close'] for x in validation_records])
+
+strat = TradingStrategy(enc_dec_model, scl, 20, 1)
+
+for x in validation_records:
+    strat.trade(x['close'])
